@@ -79,11 +79,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-  if (self.backgroundImage)
-  {
-    self.backgroundImageView.frame = self.view.frame;
-    self.backgroundImageView.image = self.backgroundImage;
-  }
+    if (self.backgroundImage) {
+        self.backgroundImageView.frame = self.view.frame;
+        self.backgroundImageView.image = self.backgroundImage;
+        self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+    }
 
   scrollView.frame = self.view.frame;
   scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * self.numberOfPages, scrollView.frame.size.height);
@@ -183,8 +183,12 @@
 
 - (void)displayNextPage
 {
-  pageControl.currentPage++;
-  [self changePage];
+    if (++pageControl.currentPage < self.numberOfPages) {
+        [self changePage];
+    } else {
+        [self.view removeFromSuperview];
+        [self removeFromParentViewController];
+    }
 }
 
 - (void)changePage
@@ -235,18 +239,28 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender
 {
-  CGFloat pageWidth = scrollView.frame.size.width;
-  int nextPage = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-  
-  // Hide the Next button when this is the last page
-  self.nextButton.hidden = nextPage == (pageControl.numberOfPages-1);
+    CGFloat pageWidth = scrollView.frame.size.width;
+    int nextPage = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    
+    // Hide the Next button when this is the last page
+    if (nextPage == pageControl.numberOfPages - 1) {
+        if (self.doneButtonText == nil) {
+            self.nextButton.hidden = YES;
+        } else {
+            [self.nextButton setTitle:self.doneButtonText forState:UIControlStateNormal];
 
-  if (pageControlUsed)
-  {
-    return;
-  }
-
-  pageControl.currentPage = nextPage;
+        }
+    } else {
+        self.nextButton.hidden = NO;
+        [self.nextButton setTitle:self.nextButtonText forState:UIControlStateNormal];
+    }
+    
+    if (pageControlUsed) {
+        return;
+    }
+    if (!isResize)
+        pageControl.currentPage = nextPage;
+    isResize = NO;
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -257,6 +271,58 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
   pageControlUsed = NO;
+}
+
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    isResize = YES;
+}
+
+-(void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    // Resize background image
+    if (self.backgroundImage) {
+        self.backgroundImageView.frame = self.view.frame;
+    }
+    
+    scrollView.frame = self.view.frame;
+    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * self.numberOfPages, scrollView.frame.size.height);
+    
+    pageControl.frame = self.pageControlFrame;
+    pageControl.numberOfPages = self.numberOfPages;
+    
+    BOOL useDefaultNextButton = !(self.nextButtonImage || self.nextButtonText);
+    if (useDefaultNextButton) {
+        self.nextButton.frame = CGRectMake(0, 0, self.nextButton.frame.size.width + 20, self.nextButton.frame.size.height);
+    } else {
+        CGRect buttonFrame = self.nextButton.frame;
+        if (self.nextButtonText) {
+            buttonFrame.size = CGSizeMake(100, 36);
+        } else if (self.nextButtonImage) {
+            buttonFrame.size = self.nextButtonImage.size;
+        }
+        self.nextButton.frame = buttonFrame;
+    }
+    CGRect buttonFrame = self.nextButton.frame;
+    buttonFrame.origin = self.nextButtonOrigin;
+    self.nextButton.frame = buttonFrame;
+    
+    int pageNum = 0;
+    for (UIView *pageView in pageViews) {
+        CGRect frame = pageView.frame;
+        frame.origin.x = pageNum * pageView.frame.size.width;
+        pageView.frame = frame;
+
+        pageNum++;
+    }
+    
+    NSInteger pageIndex = pageControl.currentPage;
+    
+    // update the scroll view to the appropriate page
+    CGRect frame = scrollView.frame;
+    frame.origin.x = frame.size.width * pageIndex;
+    frame.origin.y = 0;
+    [scrollView scrollRectToVisible:frame animated:NO];
 }
 
 @end

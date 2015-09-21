@@ -70,17 +70,12 @@ Screenshot from this example:<br>
 
 LAWalkthrough 1.0 and higher requires iOS 6.0 and above.
 
-### ARC
-
-LAWalkthrough uses ARC as of its 1.0 release.
-
-If you are using LAWalkthrough 1.0 in your non-arc project, you will need to set a `-fobjc-arc` compiler flag on all of the LAWalkthrough source files.
-
-To set a compiler flag in Xcode, go to your active target and select the "Build Phases" tab. Now select all LAWalkthrough source files, press Enter, insert `-fobjc-arc` or `-fno-objc-arc` and then "Done" to enable or disable ARC for LAWalkthrough.
+1.0.1 requires with iOS 8.0 and above for rotation support.
 
 ## Credits
 
 LAWalkthrough was created by [Larry Aasen](https://github.com/larryaasen/) in the development of [Konugo for iPhone](http://www.konugo.com).
+Rotation support added by [Pierre Maloka](https://github.com/pmaloka)
 
 ## Contact
 

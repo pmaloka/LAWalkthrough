@@ -24,10 +24,15 @@
   
   // Create pages of the walkthrough
   [walkthrough addPageWithBody:@"Take a tour of this app."];
+    [walkthrough addPageWithBody:@"Take a tour of this app 1."];
+    [walkthrough addPageWithBody:@"Take a tour of this app 2."];
+    [walkthrough addPageWithBody:@"Take a tour of this app 3."];
+    [walkthrough addPageWithNibName:@"walkthroughExample1" bundle:nil];
   [walkthrough addPageWithBody:@"Thanks for taking this tour."];
   
   // Use the default next button
-  walkthrough.nextButtonText = nil;
+    walkthrough.nextButtonText = @"Next";
+    walkthrough.doneButtonText = @"Done";
   
   // Add the walkthrough view to your view controller's view
   [self addChildViewController:walkthrough];

@@ -20,6 +20,7 @@
 		4631B603171DF4CC00B6368C /* LAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4631B602171DF4CC00B6368C /* LAViewController.m */; };
 		4631B60C171DF66D00B6368C /* LAWalkthroughViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4631B60B171DF66D00B6368C /* LAWalkthroughViewController.m */; };
 		4631B60F171DF6AD00B6368C /* tour-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4631B60D171DF6AD00B6368C /* tour-bg@2x.png */; };
+		FF1622481BB08F0F00B5B592 /* walkthroughExample1.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF1622471BB08F0F00B5B592 /* walkthroughExample1.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		4631B60A171DF66D00B6368C /* LAWalkthroughViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LAWalkthroughViewController.h; path = ../../LAWalkthrough/LAWalkthroughViewController.h; sourceTree = "<group>"; };
 		4631B60B171DF66D00B6368C /* LAWalkthroughViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LAWalkthroughViewController.m; path = ../../LAWalkthrough/LAWalkthroughViewController.m; sourceTree = "<group>"; };
 		4631B60E171DF6AD00B6368C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/tour-bg@2x.png"; sourceTree = "<group>"; };
+		FF1622471BB08F0F00B5B592 /* walkthroughExample1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = walkthroughExample1.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				4631B5F8171DF4CC00B6368C /* Default.png */,
 				4631B5FA171DF4CC00B6368C /* Default@2x.png */,
 				4631B5FC171DF4CC00B6368C /* Default-568h@2x.png */,
+				FF1622471BB08F0F00B5B592 /* walkthroughExample1.xib */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				4631B5FD171DF4CC00B6368C /* Default-568h@2x.png in Resources */,
 				4631B600171DF4CC00B6368C /* MainStoryboard.storyboard in Resources */,
 				4631B60F171DF6AD00B6368C /* tour-bg@2x.png in Resources */,
+				FF1622481BB08F0F00B5B592 /* walkthroughExample1.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

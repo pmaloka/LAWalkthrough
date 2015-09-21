@@ -27,9 +27,10 @@
 
 @interface LAWalkthroughViewController : UIViewController <UIPageViewControllerDelegate, UIScrollViewDelegate>
 {
-  UIScrollView *scrollView;
-  UIPageControl *pageControl;
-  BOOL pageControlUsed;
+    UIScrollView *scrollView;
+    UIPageControl *pageControl;
+    BOOL pageControlUsed;
+    BOOL isResize;
 }
 
 @property (nonatomic,strong) UIImage *backgroundImage;
@@ -37,6 +38,7 @@
 @property (nonatomic,readonly) UIButton *nextButton;
 @property (nonatomic) UIImage *nextButtonImage;
 @property (nonatomic) NSString *nextButtonText;
+@property (nonatomic) NSString *doneButtonText;
 @property (nonatomic,readonly) NSInteger numberOfPages;
 @property (nonatomic) NSInteger pageControlBottomMargin;
 @property (nonatomic,readonly) CGRect pageControlFrame;
