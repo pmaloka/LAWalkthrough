@@ -185,9 +185,6 @@
 {
     if (++pageControl.currentPage < self.numberOfPages) {
         [self changePage];
-    } else {
-        [self.view removeFromSuperview];
-        [self removeFromParentViewController];
     }
 }
 
