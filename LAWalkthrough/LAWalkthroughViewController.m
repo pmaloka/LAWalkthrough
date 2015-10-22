@@ -44,7 +44,7 @@
   {
     pageViews = NSMutableArray.new;
     
-    self.pageControlBottomMargin = 10;
+    self.pageControlBottomMargin = 10+40;
   }
   return self;
 }
@@ -57,24 +57,27 @@
 
 - (void)viewDidLoad
 {
-  [super viewDidLoad];
-  
-  self.backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.frame];
-  [self.view addSubview:self.backgroundImageView];
-  
-  scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
-  scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-  scrollView.pagingEnabled = YES;
-  scrollView.showsHorizontalScrollIndicator = NO;
-  scrollView.showsVerticalScrollIndicator = NO;
-  scrollView.scrollsToTop = NO;
-  scrollView.delegate = self;
-  [self.view addSubview:scrollView];
-  
-  pageControl = [self createPageControl];
-  [pageControl addTarget:self action:@selector(changePage) forControlEvents:UIControlEventValueChanged];
-  pageControl.currentPage = 0;
-  [self.view addSubview:pageControl];
+    [super viewDidLoad];
+    
+    self.backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:self.backgroundImageView];
+    
+    scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
+    scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    scrollView.pagingEnabled = YES;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.showsVerticalScrollIndicator = NO;
+    scrollView.scrollsToTop = NO;
+    scrollView.delegate = self;
+    [self.view addSubview:scrollView];
+    
+    pageControl = [self createPageControl];
+    [pageControl addTarget:self action:@selector(changePage) forControlEvents:UIControlEventValueChanged];
+    pageControl.currentPage = 0;
+    pageControl.pageIndicatorTintColor = [UIColor colorWithRed:(float)(0xd8)/255.0f green:(float)(0xd8)/255.0f blue:(float)(0xd8)/255.0f alpha:1];
+    pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:0 green:(float)(0x8c)/255.0f blue:1 alpha:1];
+    
+    [self.view addSubview:pageControl];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -104,8 +107,11 @@
     if (self.nextButtonText)
     {
       [self.nextButton setTitle:self.nextButtonText forState:UIControlStateNormal];
-      self.nextButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-      buttonFrame.size = CGSizeMake(100, 36);
+      self.nextButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+      buttonFrame.size = CGSizeMake(self.view.bounds.size.width-60, 36);
+      self.nextButton.backgroundColor = pageControl.currentPageIndicatorTintColor;
+      [self.nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+      self.nextButton.layer.cornerRadius = 3.0;
     }
     else if (self.nextButtonImage)
     {
@@ -185,6 +191,9 @@
 {
     if (++pageControl.currentPage < self.numberOfPages) {
         [self changePage];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
     }
 }
 
@@ -214,7 +223,7 @@
 
 - (CGPoint)nextButtonOrigin
 {
-  return CGPointMake(pageControl.frame.size.width - self.nextButton.frame.size.width, pageControl.frame.origin.y);
+  return CGPointMake((pageControl.frame.size.width - self.nextButton.frame.size.width)/2, self.view.bounds.size.height - self.pageControlBottomMargin);
 }
 
 - (CGRect)pageControlFrame
@@ -294,7 +303,7 @@
     } else {
         CGRect buttonFrame = self.nextButton.frame;
         if (self.nextButtonText) {
-            buttonFrame.size = CGSizeMake(100, 36);
+            buttonFrame.size = CGSizeMake(self.view.bounds.size.width-60, 36);
         } else if (self.nextButtonImage) {
             buttonFrame.size = self.nextButtonImage.size;
         }

@@ -20,7 +20,7 @@
   // Create the walkthrough view controller
   LAWalkthroughViewController *walkthrough = LAWalkthroughViewController.new;
   walkthrough.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
-  walkthrough.backgroundImage = [UIImage imageNamed:@"tour-bg@2x"];
+//  walkthrough.backgroundImage = [UIImage imageNamed:@"tour-bg@2x"];
   
   // Create pages of the walkthrough
   [walkthrough addPageWithBody:@"Take a tour of this app."];
