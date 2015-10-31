@@ -44,6 +44,7 @@
 		4631B60B171DF66D00B6368C /* LAWalkthroughViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LAWalkthroughViewController.m; path = ../../LAWalkthrough/LAWalkthroughViewController.m; sourceTree = "<group>"; };
 		4631B60E171DF6AD00B6368C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/tour-bg@2x.png"; sourceTree = "<group>"; };
 		FF1622471BB08F0F00B5B592 /* walkthroughExample1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = walkthroughExample1.xib; sourceTree = "<group>"; };
+		FF6A68821BE581B500948C91 /* LAWalkthrough.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LAWalkthrough.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +121,7 @@
 		4631B609171DF65B00B6368C /* LAWalkthrough */ = {
 			isa = PBXGroup;
 			children = (
+				FF6A68821BE581B500948C91 /* LAWalkthrough.podspec */,
 				4631B60A171DF66D00B6368C /* LAWalkthroughViewController.h */,
 				4631B60B171DF66D00B6368C /* LAWalkthroughViewController.m */,
 			);
